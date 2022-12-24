@@ -6,9 +6,9 @@ import pandas as pd
 
 rows=[]
 with open('Final.csv', 'r') as f:
-    csv_r = csv.reader(f)
-    for i in csv_r:
-        rows.append(i)
+    csv_read = csv.reader(f)
+    for row in csv_read:
+        rows.append(row)
 
 headers=rows[0]
 star_data = rows[1:]
@@ -22,7 +22,10 @@ for star in star_data:
 
 X = []
 for index, star_mass in enumerate(star_masses):
-  temp_list = [star_radiuses[index], star_mass]
+  temp_list = [
+      star_radiuses[index], 
+      star_mass
+  ]
   X.append(temp_list)
 
 WCSS = []
@@ -33,7 +36,7 @@ for i in range(1,11):
 
 plt.figure(figsize=(10,5))
 sns.lineplot(range(1,11), WCSS, marker='o', color='red')
-plt.title('The Elbow Method')
+plt.title('#Broken Elbow')
 plt.xlabel('Number of Clusters')
 plt.ylabel('WCSS')
 plt.show()
